@@ -20,6 +20,7 @@ public class TeamTest extends OpMode
         try
         {
             v_motor_left_motor=hardwareMap.dcMotor.get ("left_motor");
+            v_motor_left_motor.setDirection (DcMotor.Direction.REVERSE);
         }
         catch (Exception p_exeption)
         {
@@ -28,7 +29,7 @@ public class TeamTest extends OpMode
         try
         {
             v_motor_right_motor=hardwareMap.dcMotor.get ("right_motor");
-            v_motor_right_motor.setDirection (DcMotor.Direction.REVERSE);
+
         }
         catch (Exception p_exeption)
         {
