@@ -11,6 +11,7 @@ public class TeamTest extends OpMode
 {
     private DcMotor v_motor_left_motor;
     private DcMotor v_motor_right_motor;
+    private DcMotor v_motor_arm_motor;
     public TeamTest ()
     {
 
@@ -35,14 +36,26 @@ public class TeamTest extends OpMode
         {
             v_motor_right_motor=null;
         }
+
+        try
+        {
+            v_motor_arm_motor=hardwareMap.dcMotor.get ("arm");
+
+        }
+        catch (Exception p_exeption)
+        {
+            v_motor_arm_motor=null;
+        }
     }
 
     @Override public void loop ()
     {
         float l_left_motor_power=gamepad1.left_stick_y;
         float l_right_motor_power=gamepad1.right_stick_y;
+        float l_arm_motor_power=gamepad2.right_stick_y;
 
         v_motor_left_motor.setPower(Range.clip(l_left_motor_power,-1,1));
         v_motor_right_motor.setPower(Range.clip(l_right_motor_power,-1,1));
+        v_motor_arm_motor.setPower(Range.clip(l_arm_motor_power,-1,1));
     }
 }
