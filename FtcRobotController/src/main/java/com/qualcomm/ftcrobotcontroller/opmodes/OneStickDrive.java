@@ -21,9 +21,19 @@ public class OneStickDrive extends Hardware
         float l_left_motor_power=gamepad1.right_stick_y-gamepad1.right_stick_x;
         float l_right_motor_power=gamepad1.right_stick_y+gamepad1.right_stick_x;
         float l_arm_motor_power=gamepad2.right_stick_y;
+        double power_fractor;
 
-        v_motor_left_motor.setPower(Range.clip(l_left_motor_power,-1,1));
-        v_motor_right_motor.setPower(Range.clip(l_right_motor_power,-1,1));
+        if (gamepad1.right_bumper)
+        {
+            power_fractor=.25;
+        }
+        else
+        {
+            power_fractor=1;
+        }
+
+        v_motor_left_motor.setPower(power_fractor * Range.clip(l_left_motor_power,-1,1));
+        v_motor_right_motor.setPower(power_fractor * Range.clip(l_right_motor_power,-1,1));
 
         if (v_sensor_touch_bottom.isPressed())
         {
