@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.Range;
+import java.lang.Math;
 
 /**
  * Created by jhlavace on 11/14/15.
@@ -19,6 +20,20 @@ public class Hardware extends OpMode
     public Servo v_servo_right_servo;
     public TouchSensor v_sensor_touch_bottom;
     public TouchSensor v_sensor_touch_top;
+    private static final double WHEEL_DISTANCE = 13.5; //inchs
+    private static final double WHEEL_DIEMITER = 4.0 ;//inchs
+    private static final double WHEEL_CIRC = WHEEL_DIEMITER*Math.PI;
+
+    // Changes the distance that we want the robot to travel to the degrees the motor has to turn
+    public double DistanceToDegrees(double x)
+    {
+        return 720*x/WHEEL_CIRC;
+    }
+    // Changes the distance that the robot has to turn into degrees the motor has to turn.
+    public  double TurnToDegrees(double x)
+    {
+        return 2*x* WHEEL_DISTANCE/WHEEL_DIEMITER;
+    }
 
     public Hardware()
     {

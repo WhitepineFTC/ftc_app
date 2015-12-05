@@ -35,7 +35,7 @@ public class OneStickDrive extends Hardware
 
         v_motor_left_motor.setPower(power_fractor * Range.clip(l_left_motor_power,-1,1));
         v_motor_right_motor.setPower(power_fractor * Range.clip(l_right_motor_power,-1,1));
-        v_motor_extend_motor.setPower(.5*Range.clip(l_extend_motor_power,-1,1));
+        v_motor_extend_motor.setPower(Range.clip(l_extend_motor_power,-1,1));
 
         if (v_sensor_touch_bottom.isPressed())
         {
@@ -49,7 +49,7 @@ public class OneStickDrive extends Hardware
         {
             l_arm_motor_power=Range.clip(l_arm_motor_power,-1,1);
         }
-        v_motor_arm_motor.setPower(l_arm_motor_power);
+        v_motor_arm_motor.setPower(0.5*l_arm_motor_power);
 
         if (gamepad2.a)
         {

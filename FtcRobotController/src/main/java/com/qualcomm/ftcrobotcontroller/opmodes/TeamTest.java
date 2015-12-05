@@ -20,16 +20,13 @@ public class TeamTest extends Hardware
     @Override public void loop ()
     {
         float l_left_motor_power=gamepad1.left_stick_y;
-        telemetry.addData("debug", "1");
         float l_right_motor_power=gamepad1.right_stick_y;
-        telemetry.addData("debug", "2");
         float l_arm_motor_power=gamepad2.right_stick_y;
-        telemetry.addData("debug", "3");
+        float l_extend_motor_power=gamepad2.left_stick_y;
 
         v_motor_left_motor.setPower(Range.clip(l_left_motor_power, -1, 1));
-        telemetry.addData("debug", "4");
         v_motor_right_motor.setPower(Range.clip(l_right_motor_power, -1, 1));
-        telemetry.addData("debug", "5");
+        v_motor_extend_motor.setPower(Range.clip(l_extend_motor_power, -1,1));
 
         if (v_sensor_touch_bottom.isPressed())
         {
@@ -43,8 +40,7 @@ public class TeamTest extends Hardware
         {
             l_arm_motor_power=Range.clip(l_arm_motor_power,-1,1);
         }
-        v_motor_arm_motor.setPower(l_arm_motor_power);
-        telemetry.addData("debug", "6");
+        v_motor_arm_motor.setPower(0.5*l_arm_motor_power);
 
         if (gamepad2.a)
         {
