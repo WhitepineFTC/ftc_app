@@ -51,6 +51,8 @@ public class AutoMode extends Hardware
             case DRIVING:
             {
                 telemetry.addData("stage", "DRIVING");
+                // RUN_USING_ENCODERS must be set right before starting motors
+                // for some weird reason
                 v_motor_left_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
                 v_motor_right_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
                 v_motor_left_motor.setPower(-1);
