@@ -56,7 +56,7 @@ public class AutoMode extends Hardware
                 v_motor_left_motor.setPower(-1);
                 v_motor_right_motor.setPower(-1);
                 telemetry.addData("position", v_motor_left_motor.getCurrentPosition());
-                if (v_motor_left_motor.getCurrentPosition() >= DRIVE_1_DISTANCE)
+                if (v_motor_left_motor.getCurrentPosition() <= -DRIVE_1_DISTANCE)
                 {
                     telemetry.addData("stage", "driving - reached");
                     v_motor_left_motor.setPower(0);

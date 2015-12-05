@@ -14,6 +14,7 @@ public class Hardware extends OpMode
     public DcMotor v_motor_left_motor;
     public DcMotor v_motor_right_motor;
     public DcMotor v_motor_arm_motor;
+    public DcMotor v_motor_extend_motor;
     public Servo v_servo_left_servo;
     public Servo v_servo_right_servo;
     public TouchSensor v_sensor_touch_bottom;
@@ -66,6 +67,18 @@ public class Hardware extends OpMode
         {
             v_motor_arm_motor=null;
             telemetry.addData("arm","not found");
+        }
+        
+        try
+        {
+            v_motor_extend_motor=hardwareMap.dcMotor.get ("extend");
+            telemetry.addData("extend","found");
+
+        }
+        catch (Exception p_exeption)
+        {
+            v_motor_extend_motor=null;
+            telemetry.addData("extend","not found");
         }
 
 
