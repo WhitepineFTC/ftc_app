@@ -20,19 +20,20 @@ public class Hardware extends OpMode
     public Servo v_servo_right_servo;
     public TouchSensor v_sensor_touch_bottom;
     public TouchSensor v_sensor_touch_top;
+    private static final double ENCODER_PER_ROT = 1440;
     private static final double WHEEL_DISTANCE = 13.5; //inchs
-    private static final double WHEEL_DIEMITER = 4.0 ;//inchs
+    private static final double WHEEL_DIEMITER = 4.0; //inchs
     private static final double WHEEL_CIRC = WHEEL_DIEMITER*Math.PI;
 
     // Changes the distance that we want the robot to travel to the degrees the motor has to turn
     public double DistanceToDegrees(double x)
     {
-        return 720*x/WHEEL_CIRC;
+        return 2*ENCODER_PER_ROT*x/WHEEL_CIRC;
     }
     // Changes the distance that the robot has to turn into degrees the motor has to turn.
     public  double TurnToDegrees(double x)
     {
-        return 2*x* WHEEL_DISTANCE/WHEEL_DIEMITER;
+        return 2*x*WHEEL_DISTANCE/WHEEL_DIEMITER;
     }
 
     public Hardware()
@@ -63,6 +64,8 @@ public class Hardware extends OpMode
         try
         {
             v_motor_right_motor=hardwareMap.dcMotor.get ("right_motor");
+            v_motor_right_motor.setDirection (DcMotor.Direction.FORWARD);
+
             telemetry.addData("right motor","found");
 
         }

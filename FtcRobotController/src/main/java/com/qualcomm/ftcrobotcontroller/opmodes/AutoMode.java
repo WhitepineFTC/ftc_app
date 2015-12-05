@@ -1,5 +1,6 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.util.Range;
 
@@ -12,7 +13,7 @@ public class AutoMode extends Hardware
         RESET1, DRIVING, TURNING, DRIVING_AGAIN, END
     }
 
-    private static final double DRIVE_1_DISTANCE = 20.0;
+    private double DRIVE_1_DISTANCE = DistanceToDegrees (48);
 
     private Stage stage;
 
@@ -30,8 +31,12 @@ public class AutoMode extends Hardware
     @Override public void init ()
     {
         super.init();
-
         telemetry.addData("encoders", "init");
+        reset_encoders();
+
+        // fix direction of motors
+        v_motor_right_motor.setDirection (DcMotor.Direction.REVERSE);
+        v_motor_left_motor.setDirection (DcMotor.Direction.FORWARD);
         v_motor_left_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         v_motor_right_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         stage=Stage.RESET1;
@@ -44,23 +49,23 @@ public class AutoMode extends Hardware
             case RESET1:
             {
                 telemetry.addData("stage", "reset1");
+                // RUN_USING_ENCODERS must be set right before starting motors
+                // for some weird reason
                 reset_encoders();
+                v_motor_left_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+                v_motor_right_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+                v_motor_left_motor.setPower(.5);
+                v_motor_right_motor.setPower(.5);
                 stage=Stage.DRIVING;
                 break;
             }
             case DRIVING:
             {
-                telemetry.addData("stage", "DRIVING");
-                // RUN_USING_ENCODERS must be set right before starting motors
-                // for some weird reason
-                v_motor_left_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-                v_motor_right_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-                v_motor_left_motor.setPower(-1);
-                v_motor_right_motor.setPower(-1);
-                telemetry.addData("position", v_motor_left_motor.getCurrentPosition());
-                if (v_motor_left_motor.getCurrentPosition() <= -DRIVE_1_DISTANCE)
+                v_motor_left_motor.setPower(.5);
+                v_motor_right_motor.setPower(.5);
+                if (v_motor_right_motor.getCurrentPosition() >= DRIVE_1_DISTANCE)
                 {
-                    telemetry.addData("stage", "driving - reached");
+                    reset_encoders();
                     v_motor_left_motor.setPower(0);
                     v_motor_right_motor.setPower(0);
                     stage=Stage.END;
