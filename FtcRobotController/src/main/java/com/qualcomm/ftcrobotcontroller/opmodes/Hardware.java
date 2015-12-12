@@ -16,8 +16,8 @@ public class Hardware extends OpMode
     public DcMotor v_motor_right_motor;
     public DcMotor v_motor_arm_motor;
     public DcMotor v_motor_extend_motor;
-    public Servo v_servo_left_servo;
-    public Servo v_servo_right_servo;
+    public Servo v_servo_sweaper_servo;
+    public Servo v_servo_pan_servo;
     public TouchSensor v_sensor_touch_bottom;
     public TouchSensor v_sensor_touch_top;
     private static final double ENCODER_PER_ROT = 1440;
@@ -103,26 +103,26 @@ public class Hardware extends OpMode
         //servos:
         try
         {
-             v_servo_left_servo=hardwareMap.servo.get("left_servo");
-             v_servo_left_servo.setPosition (0);
-             telemetry.addData("left survo", "found");
+             v_servo_sweaper_servo=hardwareMap.servo.get("left_servo");
+             v_servo_sweaper_servo.setPosition (0);
+             telemetry.addData("sweaper survo", "found");
         }
         catch (Exception p_exception)
         {
-            v_servo_left_servo=null;
-            telemetry.addData("left survo", "not found");
+            v_servo_sweaper_servo=null;
+            telemetry.addData("sweaper survo", "not found");
         }
 
         try
         {
-            v_servo_right_servo=hardwareMap.servo.get("right_servo");
-            v_servo_right_servo.setPosition (.3);
-            telemetry.addData("right survo", "found");
+            v_servo_pan_servo=hardwareMap.servo.get("right_servo");
+            v_servo_pan_servo.setPosition (.3);
+            telemetry.addData("pan survo", "found");
         }
         catch (Exception p_exception)
         {
-            v_servo_right_servo=null;
-            telemetry.addData("right survo", "not found");
+            v_servo_pan_servo=null;
+            telemetry.addData("pan survo", "not found");
         }
 
         //sensors:

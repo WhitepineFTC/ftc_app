@@ -44,15 +44,15 @@ public class TeamTest extends Hardware
 
         if (gamepad2.a)
         {
-            v_servo_left_servo.setPosition(1);
-            v_servo_right_servo.setPosition(0);
+            v_servo_sweaper_servo.setPosition(1);
+            v_servo_pan_servo.setPosition(0);
             telemetry.addData("hand","oppen");
 
         }
         if (gamepad2.b)
         {
-            v_servo_left_servo.setPosition(.5);
-            v_servo_right_servo.setPosition(.5);
+            v_servo_sweaper_servo.setPosition(.5);
+            v_servo_pan_servo.setPosition(.5);
             telemetry.addData("hand", "close");
         }
     }
