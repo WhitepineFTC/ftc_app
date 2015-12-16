@@ -2,16 +2,14 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
-import com.qualcomm.robotcore.util.Range;
-import java.lang.Math;
-import com.qualcomm.robotcore.hardware.DcMotorController;
 
 /**
  * Created by User on 12/9/2015.
  */
-public class LinearAutomode extends LinearOpMode {
+public class LinearAutomodeBlue extends LinearOpMode {
     public DcMotor v_motor_left_motor;
     public DcMotor v_motor_right_motor;
     public DcMotor v_motor_arm_motor;
@@ -190,9 +188,9 @@ public class LinearAutomode extends LinearOpMode {
         v_motor_right_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
         DriveDistance(24);
-        Turn(90);
+        Turn(-80);
         DriveDistance(42);
-        Turn(90);
+        Turn(-80);
         DriveDistance(24);
     }
 }
