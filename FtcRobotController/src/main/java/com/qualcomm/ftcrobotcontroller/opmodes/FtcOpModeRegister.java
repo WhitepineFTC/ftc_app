@@ -63,6 +63,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("NullOp", NullOp.class);
     manager.register("TeamTest", TeamTest.class);
     manager.register("OneStickDrive", OneStickDrive.class);
-    manager.register("AutoMode", AutoMode.class);
+    manager.register("LinearAutomode", LinearAutomode.class);
+    manager.register("LinearAutomodeBlue", LinearAutomodeBlue.class);
   }
 }
