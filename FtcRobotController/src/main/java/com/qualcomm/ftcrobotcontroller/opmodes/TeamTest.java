@@ -1,14 +1,10 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.TouchSensor;
-import com.qualcomm.robotcore.util.Range;
 
-/**
- * Created by jhlavace on 11/14/15.
- */
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+@TeleOp(name="TeamTest: testing stuff", group="Testing")
+//@Disable
 public class TeamTest extends Hardware
 {
 
@@ -17,30 +13,31 @@ public class TeamTest extends Hardware
 
     }
 
-    @Override public void loop ()
-    {
-        float l_left_motor_power=gamepad1.left_stick_y;
-        float l_right_motor_power=gamepad1.right_stick_y;
-        float l_arm_motor_power=gamepad2.right_stick_y;
-        float l_extend_motor_power=gamepad2.left_stick_y;
-
-        if (v_sensor_touch_1.isPressed())
-        {
+    @Override public void loop () {
+        /*if (v_sensor_touch_1.isPressed()) {
+            telemetry.addData("Touchy 1", "pressed");
             v_motor_1.setPower(1);
-        }
-        else
-        {
-            v_motor_2.setPower(0);
+        } else {
+            v_motor_1.setPower(0);
         }
 
-        if (v_sensor_touch_2.isPressed())
-        {
+        if (v_sensor_touch_2.isPressed()) {
+            telemetry.addData("Touchy 2", "pressed");
             v_motor_2.setPower(1);
-        }
-        else
-        {
+        } else {
             v_motor_2.setPower(0);
+        }*/
+
+        if (gamepad1.a) {
+            v_servo_1.setPosition(0.5);
+        } else if (gamepad1.b) {
+            v_servo_1.setPosition(1);
+        } else {
+            v_servo_1.setPosition(0);
         }
+
+        v_motor_1.setPower(gamepad1.left_stick_y);
+        v_motor_2.setPower(gamepad1.right_stick_y);
 
     }
 }

@@ -64,7 +64,6 @@ public class Hardware extends OpMode
         {
             v_motor_2=hardwareMap.dcMotor.get ("motor 2");
             v_motor_2.setDirection (DcMotor.Direction.FORWARD);
-
             telemetry.addData("motor 2","found");
 
         }
@@ -73,7 +72,6 @@ public class Hardware extends OpMode
             v_motor_2=null;
             telemetry.addData("motor 2"," not found");
         }
-
 
 
         //servos:
