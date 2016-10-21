@@ -24,48 +24,23 @@ public class TeamTest extends Hardware
         float l_arm_motor_power=gamepad2.right_stick_y;
         float l_extend_motor_power=gamepad2.left_stick_y;
 
-        v_motor_left_motor.setPower(Range.clip(l_left_motor_power, -1, 1));
-        v_motor_right_motor.setPower(Range.clip(l_right_motor_power, -1, 1));
-        v_motor_extend_motor.setPower(Range.clip(l_extend_motor_power, -1,1));
-
-        if (v_sensor_touch_bottom.isPressed())
+        if (v_sensor_touch_1.isPressed())
         {
-            l_arm_motor_power=Range.clip(l_arm_motor_power,-1,0);
-        }
-        else if (v_sensor_touch_top.isPressed())
-        {
-            l_arm_motor_power=Range.clip(l_arm_motor_power,0,1);
+            v_motor_1.setPower(1);
         }
         else
         {
-            l_arm_motor_power=Range.clip(l_arm_motor_power,-1,1);
+            v_motor_2.setPower(0);
         }
-        v_motor_arm_motor.setPower(0.5*l_arm_motor_power);
 
-        if (gamepad2.a)
+        if (v_sensor_touch_2.isPressed())
         {
-            v_servo_pan_servo.setPosition(0);
-            telemetry.addData("pan","down");
+            v_motor_2.setPower(1);
         }
-        if (gamepad2.b)
+        else
         {
-            v_servo_pan_servo.setPosition(.6);
-            telemetry.addData("pan", "middle");
+            v_motor_2.setPower(0);
         }
-        if (gamepad2.y)
-        {
-            v_servo_pan_servo.setPosition(1);
-            telemetry.addData("pan","up");
-        }
-        if(gamepad2.right_bumper)
-        {
-            v_servo_sweaper_servo.setPosition(1);
-            telemetry.addData("sweaper","up");
-        }
-        if(gamepad2.left_bumper)
-        {
-            v_servo_sweaper_servo.setPosition(0.5);
-            telemetry.addData("sweaper","down");
-        }
+
     }
 }

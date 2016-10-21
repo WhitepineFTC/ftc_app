@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.util.Range;
 
 /**
  * Created by jhlavace on 11/14/15.
- */
+
 public class OneStickDrive extends Hardware
 {
 
@@ -78,3 +78,4 @@ public class OneStickDrive extends Hardware
         }
         }
 }
+*/

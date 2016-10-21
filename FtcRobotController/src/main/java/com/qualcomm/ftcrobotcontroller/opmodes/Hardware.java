@@ -12,14 +12,13 @@ import java.lang.Math;
  */
 public class Hardware extends OpMode
 {
-    public DcMotor v_motor_left_motor;
-    public DcMotor v_motor_right_motor;
-    public DcMotor v_motor_arm_motor;
-    public DcMotor v_motor_extend_motor;
-    public Servo v_servo_sweaper_servo;
-    public Servo v_servo_pan_servo;
-    public TouchSensor v_sensor_touch_bottom;
-    public TouchSensor v_sensor_touch_top;
+    public DcMotor v_motor_1;
+    public DcMotor v_motor_2;
+
+    public Servo v_servo_2;
+    public Servo v_servo_1;
+    public TouchSensor v_sensor_touch_1;
+    public TouchSensor v_sensor_touch_2;
     private static final double ENCODER_PER_ROT = 1440;
     private static final double WHEEL_DISTANCE = 13.5; //inchs
     private static final double WHEEL_DIEMITER = 4.0; //inchs
@@ -51,101 +50,78 @@ public class Hardware extends OpMode
         //motors:
         try
         {
-            v_motor_left_motor=hardwareMap.dcMotor.get ("left_motor");
-            v_motor_left_motor.setDirection (DcMotor.Direction.REVERSE);
-            telemetry.addData("left moter","found");
+            v_motor_1=hardwareMap.dcMotor.get ("motor 1");
+            v_motor_1.setDirection (DcMotor.Direction.REVERSE);
+            telemetry.addData("Motor 1","found");
         }
         catch (Exception p_exeption)
         {
-            v_motor_left_motor=null;
-            telemetry.addData("left moter","not found");
+            v_motor_1=null;
+            telemetry.addData("Motor 1","not found");
         }
 
         try
         {
-            v_motor_right_motor=hardwareMap.dcMotor.get ("right_motor");
-            v_motor_right_motor.setDirection (DcMotor.Direction.FORWARD);
+            v_motor_2=hardwareMap.dcMotor.get ("motor 2");
+            v_motor_2.setDirection (DcMotor.Direction.FORWARD);
 
-            telemetry.addData("right motor","found");
-
-        }
-        catch (Exception p_exeption)
-        {
-            v_motor_right_motor=null;
-            telemetry.addData("right motor"," not found");
-        }
-
-        try
-        {
-            v_motor_arm_motor=hardwareMap.dcMotor.get ("arm");
-            telemetry.addData("arm","found");
+            telemetry.addData("motor 2","found");
 
         }
         catch (Exception p_exeption)
         {
-            v_motor_arm_motor=null;
-            telemetry.addData("arm","not found");
+            v_motor_2=null;
+            telemetry.addData("motor 2"," not found");
         }
-        
-        try
-        {
-            v_motor_extend_motor=hardwareMap.dcMotor.get ("extend");
-            telemetry.addData("extend","found");
 
-        }
-        catch (Exception p_exeption)
-        {
-            v_motor_extend_motor=null;
-            telemetry.addData("extend","not found");
-        }
 
 
         //servos:
         try
         {
-             v_servo_sweaper_servo=hardwareMap.servo.get("left_servo");
-             v_servo_sweaper_servo.setPosition (0);
-             telemetry.addData("sweaper survo", "found");
+             v_servo_2=hardwareMap.servo.get("servo 2");
+             v_servo_2.setPosition (0);
+             telemetry.addData("servo 2", "found");
         }
         catch (Exception p_exception)
         {
-            v_servo_sweaper_servo=null;
-            telemetry.addData("sweaper survo", "not found");
+            v_servo_2=null;
+            telemetry.addData("survo 2", "not found");
         }
 
         try
         {
-            v_servo_pan_servo=hardwareMap.servo.get("right_servo");
-            v_servo_pan_servo.setPosition (.3);
-            telemetry.addData("pan survo", "found");
+            v_servo_1=hardwareMap.servo.get("servo 1");
+            v_servo_1.setPosition (.3);
+            telemetry.addData("survo 1", "found");
         }
         catch (Exception p_exception)
         {
-            v_servo_pan_servo=null;
-            telemetry.addData("pan survo", "not found");
+            v_servo_1=null;
+            telemetry.addData("survo 1", "not found");
         }
 
         //sensors:
         try
         {
-            v_sensor_touch_bottom=hardwareMap.touchSensor.get("bottom arm");
-            telemetry.addData("bottom sensor", "found");
+            v_sensor_touch_1=hardwareMap.touchSensor.get("touchy 1");
+            telemetry.addData("touchy 1", "found");
         }
         catch (Exception p_exeption)
         {
-            v_sensor_touch_bottom=null;
-            telemetry.addData("bottom sensor","not found");
+            v_sensor_touch_1=null;
+            telemetry.addData("touchy 1","not found");
         }
 
         try
         {
-            v_sensor_touch_top=hardwareMap.touchSensor.get("top arm");
-            telemetry.addData("top sensor", "found");
+            v_sensor_touch_2=hardwareMap.touchSensor.get("touchy 2");
+            telemetry.addData("touchy 2", "found");
         }
         catch (Exception p_exeption)
         {
-            v_sensor_touch_top=null;
-            telemetry.addData("top sensor","not found");
+            v_sensor_touch_2=null;
+            telemetry.addData("touchy 2","not found");
         }
     }
 }

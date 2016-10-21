@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.Range;
 
 /**
  * Created by jhlavace on 11/14/15.
- */
+
 public class AutoMode extends Hardware
 {
     private enum Stage {
@@ -24,8 +24,8 @@ public class AutoMode extends Hardware
 
     private void reset_encoders ()
     {
-        v_motor_left_motor.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
-        v_motor_right_motor.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
+        v_motor_left_motor.setMode(DcMotor.RunMode.RESET_ENCODERS);
+        v_motor_right_motor.setMode(DcMotor.RunMode.RESET_ENCODERS);
     }
 
     @Override public void init ()
@@ -37,8 +37,8 @@ public class AutoMode extends Hardware
         // fix direction of motors
         v_motor_right_motor.setDirection (DcMotor.Direction.REVERSE);
         v_motor_left_motor.setDirection (DcMotor.Direction.FORWARD);
-        v_motor_left_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        v_motor_right_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+        v_motor_left_motor.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+        v_motor_right_motor.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
         stage=Stage.RESET1;
     }
 
@@ -52,8 +52,8 @@ public class AutoMode extends Hardware
                 // RUN_USING_ENCODERS must be set right before starting motors
                 // for some weird reason
                 reset_encoders();
-                v_motor_left_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-                v_motor_right_motor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+                v_motor_left_motor.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+                v_motor_right_motor.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
                 v_motor_left_motor.setPower(.5);
                 v_motor_right_motor.setPower(.5);
                 stage=Stage.DRIVING;
@@ -79,3 +79,4 @@ public class AutoMode extends Hardware
         }
     }
 }
+*/
