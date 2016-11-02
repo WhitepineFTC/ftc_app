@@ -12,13 +12,16 @@ import java.lang.Math;
  */
 public class Hardware extends OpMode
 {
-    public DcMotor v_motor_1;
-    public DcMotor v_motor_2;
+    public DcMotor v_motor_left_wheel;
+    public DcMotor v_motor_right_wheel;
+    public DcMotor v_motor_lift;
+    public DcMotor v_motor_shooter;
 
-    public Servo v_servo_2;
-    public Servo v_servo_1;
-    public TouchSensor v_sensor_touch_1;
-    public TouchSensor v_sensor_touch_2;
+
+    public Servo v_servo_left_flap;
+    public Servo v_servo_right_flap;
+    //public TouchSensor v_sensor_touch_1;
+    //public TouchSensor v_sensor_touch_2;
     private static final double ENCODER_PER_ROT = 1440;
     private static final double WHEEL_DISTANCE = 13.5; //inchs
     private static final double WHEEL_DIEMITER = 4.0; //inchs
@@ -50,56 +53,82 @@ public class Hardware extends OpMode
         //motors:
         try
         {
-            v_motor_1=hardwareMap.dcMotor.get ("motor 1");
-            v_motor_1.setDirection (DcMotor.Direction.REVERSE);
-            telemetry.addData("Motor 1","found");
+            v_motor_left_wheel=hardwareMap.dcMotor.get ("Left Wheel");
+            v_motor_left_wheel.setDirection (DcMotor.Direction.REVERSE);
+            telemetry.addData("Left Wheel Motor","found");
         }
         catch (Exception p_exeption)
         {
-            v_motor_1=null;
-            telemetry.addData("Motor 1","not found");
+            v_motor_left_wheel=null;
+            telemetry.addData("Left Wheel Motor","not found");
         }
 
         try
         {
-            v_motor_2=hardwareMap.dcMotor.get ("motor 2");
-            v_motor_2.setDirection (DcMotor.Direction.FORWARD);
-            telemetry.addData("motor 2","found");
+            v_motor_right_wheel=hardwareMap.dcMotor.get ("Right Wheel");
+            v_motor_right_wheel.setDirection (DcMotor.Direction.FORWARD);
+            telemetry.addData("Right Wheel Motor","found");
 
         }
         catch (Exception p_exeption)
         {
-            v_motor_2=null;
-            telemetry.addData("motor 2"," not found");
+            v_motor_right_wheel=null;
+            telemetry.addData("Right Wheel Motor"," not found");
+        }
+
+        try
+        {
+            v_motor_lift=hardwareMap.dcMotor.get ("Lift");
+            v_motor_lift.setDirection (DcMotor.Direction.FORWARD);
+            telemetry.addData("Lift Motor","found");
+
+        }
+        catch (Exception p_exeption)
+        {
+            v_motor_lift=null;
+            telemetry.addData("Lift Motor"," not found");
+        }
+
+        try
+        {
+            v_motor_shooter=hardwareMap.dcMotor.get ("Shooter");
+            v_motor_shooter.setDirection (DcMotor.Direction.FORWARD);
+            telemetry.addData("Shooter Motor","found");
+
+        }
+        catch (Exception p_exeption)
+        {
+            v_motor_shooter=null;
+            telemetry.addData("Shooter Motor"," not found");
         }
 
 
         //servos:
         try
         {
-             v_servo_2=hardwareMap.servo.get("servo 2");
-             v_servo_2.setPosition (0);
-             telemetry.addData("servo 2", "found");
+             v_servo_left_flap=hardwareMap.servo.get("Left Flap");
+             v_servo_left_flap.setPosition (0);
+             telemetry.addData("Left Flap Servo", "found");
         }
         catch (Exception p_exception)
         {
-            v_servo_2=null;
-            telemetry.addData("survo 2", "not found");
+            v_servo_left_flap=null;
+            telemetry.addData("Left Flap Servo", "not found");
         }
 
         try
         {
-            v_servo_1=hardwareMap.servo.get("servo 1");
-            v_servo_1.setPosition (.3);
-            telemetry.addData("survo 1", "found");
+            v_servo_right_flap=hardwareMap.servo.get("Right Flap");
+            v_servo_right_flap.setPosition (0);
+            telemetry.addData("Right Flap Servo", "found");
         }
         catch (Exception p_exception)
         {
-            v_servo_1=null;
-            telemetry.addData("survo 1", "not found");
+            v_servo_right_flap=null;
+            telemetry.addData("Right Flap Servo", "not found");
         }
 
-        //sensors:
+        /*/sensors:
         try
         {
             v_sensor_touch_1=hardwareMap.touchSensor.get("touchy 1");
@@ -120,6 +149,6 @@ public class Hardware extends OpMode
         {
             v_sensor_touch_2=null;
             telemetry.addData("touchy 2","not found");
-        }
+        }/*/
     }
 }

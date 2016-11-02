@@ -1,14 +1,13 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="TeamTest: testing stuff", group="Testing")
+@TeleOp(name="TankDrive: two stick tank drive", group="Driving")
 //@Disable
-public class TeamTest extends Hardware
+public class TankDrive extends Hardware
 {
 
-    public TeamTest ()
+    public TankDrive ()
     {
 
     }
@@ -28,16 +27,20 @@ public class TeamTest extends Hardware
             v_motor_2.setPower(0);
         }*/
 
-        if (gamepad1.a) {
-            v_servo_1.setPosition(0.5);
-        } else if (gamepad1.b) {
-            v_servo_1.setPosition(1);
+        if (gamepad1.right_bumper) {
+            v_servo_right_flap.setPosition(0.5);
         } else {
-            v_servo_1.setPosition(0);
+            v_servo_right_flap.setPosition(0);
         }
 
-        v_motor_1.setPower(gamepad1.left_stick_y);
-        v_motor_2.setPower(gamepad1.right_stick_y);
+        if (gamepad1.left_bumper) {
+            v_servo_left_flap.setPosition(0.5);
+        } else {
+            v_servo_left_flap.setPosition(0);
+        }
+
+        v_motor_left_wheel.setPower(gamepad1.left_stick_y);
+        v_motor_right_wheel.setPower(gamepad1.right_stick_y);
 
     }
 }
