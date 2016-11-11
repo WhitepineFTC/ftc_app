@@ -17,11 +17,12 @@ public class Hardware extends OpMode
     public DcMotor v_motor_lift;
     public DcMotor v_motor_shooter;
 
-
     public Servo v_servo_left_flap;
     public Servo v_servo_right_flap;
-    //public TouchSensor v_sensor_touch_1;
-    //public TouchSensor v_sensor_touch_2;
+    public Servo v_servo_claw;
+
+    public TouchSensor v_sensor_top;
+    public TouchSensor v_sensor_bottom;
     private static final double ENCODER_PER_ROT = 1440;
     private static final double WHEEL_DISTANCE = 13.5; //inchs
     private static final double WHEEL_DIEMITER = 4.0; //inchs
@@ -128,27 +129,39 @@ public class Hardware extends OpMode
             telemetry.addData("Right Flap Servo", "not found");
         }
 
-        /*/sensors:
         try
         {
-            v_sensor_touch_1=hardwareMap.touchSensor.get("touchy 1");
-            telemetry.addData("touchy 1", "found");
+            v_servo_claw=hardwareMap.servo.get("Claw);
+            v_servo_claw.setPosition (0);
+            telemetry.addData("Claw Servo", "found");
+        }
+        catch (Exception p_exception)
+        {
+            v_servo_claw=null;
+            telemetry.addData("Claw Servo", "not found");
+        }
+
+        //sensors:
+        try
+        {
+            v_sensor_top=hardwareMap.touchSensor.get("Top Sensor");
+            telemetry.addData("Top Sensor", "found");
         }
         catch (Exception p_exeption)
         {
-            v_sensor_touch_1=null;
-            telemetry.addData("touchy 1","not found");
+            v_sensor_top=null;
+            telemetry.addData("Top Sensor","not found");
         }
 
         try
         {
-            v_sensor_touch_2=hardwareMap.touchSensor.get("touchy 2");
-            telemetry.addData("touchy 2", "found");
+            v_sensor_bottom=hardwareMap.touchSensor.get("Bottom Sensor");
+            telemetry.addData("Bottom Sensor", "found");
         }
         catch (Exception p_exeption)
         {
-            v_sensor_touch_2=null;
-            telemetry.addData("touchy 2","not found");
-        }/*/
+            v_sensor_bottom=null;
+            telemetry.addData("Bottom Sensor","not found");
+        }
     }
 }
