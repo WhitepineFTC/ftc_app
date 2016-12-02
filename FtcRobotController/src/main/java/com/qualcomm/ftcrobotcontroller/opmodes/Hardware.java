@@ -34,9 +34,10 @@ public class Hardware extends OpMode
         return (int) exact;
     }
     // Changes the distance that the robot has to turn into degrees the motor has to turn.
-    public  double TurnToDegrees(double x)
+    public  int TurnToDegrees(double x)
     {
-        return 2*x*WHEEL_DISTANCE/WHEEL_DIEMITER;
+        double exact = 2*x*WHEEL_DISTANCE/WHEEL_DIEMITER;
+        return (int) exact;
     }
 
     public void resetEndoders()

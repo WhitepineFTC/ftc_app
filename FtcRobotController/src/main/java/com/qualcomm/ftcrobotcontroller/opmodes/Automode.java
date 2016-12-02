@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 public class Automode extends Hardware {
 
     private int distance;
+    private int turn;
 
     enum States {
         INIT, DRIVE_OUT, TURN, RUN_MOTOR, PUSH_BALL, STOP
@@ -29,6 +30,7 @@ public class Automode extends Hardware {
         resetEndoders();
 
         distance = DistanceToDegrees(75); // Should be called DistanceToEncoders
+        turn = TurnToDegrees(90);
     }
 
     // TODO: Rewrite this with checks for null pointers
@@ -43,9 +45,15 @@ public class Automode extends Hardware {
                 v_motor_left_wheel.setPower(-1);
                 v_motor_right_wheel.setPower(-1);
                 if (v_motor_left_wheel.getCurrentPosition() <= -distance)
-                    st = States.STOP;
+                    resetEndoders();
+                    st = States.TURN;
                 break;
             case TURN:
+                v_motor_left_wheel.setPower(-1);
+                v_motor_right_wheel.setPower(1);
+                if (v_motor_left_wheel.getCurrentPosition() <= -turn)
+                    resetEndoders();
+                    st = States.STOP;
                 break;
             case RUN_MOTOR:
                 break;
