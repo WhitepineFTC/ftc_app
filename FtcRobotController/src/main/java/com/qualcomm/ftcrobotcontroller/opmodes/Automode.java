@@ -12,6 +12,12 @@ public class Automode extends Hardware {
 
     private int distance;
 
+    enum States {
+        INIT, DRIVE_OUT, TURN, RUN_MOTOR, PUSH_BALL, STOP
+    }
+
+    private States st = States.INIT;
+
     public Automode ()
     {
 
@@ -29,14 +35,28 @@ public class Automode extends Hardware {
 
     @Override public void loop () {
 
-        if (v_motor_left_wheel.getCurrentPosition() > -distance){
-            v_motor_left_wheel.setPower(-1);
-            v_motor_right_wheel.setPower(-1);
+        switch (st) {
+            case INIT:
+                st = States.DRIVE_OUT;
+                break;
+            case DRIVE_OUT:
+                v_motor_left_wheel.setPower(-1);
+                v_motor_right_wheel.setPower(-1);
+                if (v_motor_left_wheel.getCurrentPosition() <= -distance)
+                    st = States.STOP;
+                break;
+            case TURN:
+                break;
+            case RUN_MOTOR:
+                break;
+            case PUSH_BALL:
+                break;
+            case STOP:
+                v_motor_left_wheel.setPower(0);
+                v_motor_right_wheel.setPower(0);
+                break;
         }
-        else {
-            v_motor_left_wheel.setPower(0);
-            v_motor_right_wheel.setPower(0);
-        }
+
 
     }
 
