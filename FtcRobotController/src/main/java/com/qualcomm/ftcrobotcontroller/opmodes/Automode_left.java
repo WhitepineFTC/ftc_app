@@ -3,13 +3,13 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.hardware.adafruit.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name="AutoMode Right", group="AutoMode")
+@Autonomous(name="AutoMode Left", group="AutoMode")
 //@Disable
 /**
  * Created by jhlavace on 11/12/16.
  */
 
-public class Automode extends Hardware {
+public class Automode_left extends Hardware {
 
     private int distance;
     private int turn;
@@ -23,7 +23,7 @@ public class Automode extends Hardware {
 
     private States st = States.INIT;
 
-    public Automode ()
+    public Automode_left ()
     {
 
     }
@@ -57,9 +57,9 @@ public class Automode extends Hardware {
                 }
                 break;
             case TURN:
-                v_motor_left_wheel.setPower(1);
-                v_motor_right_wheel.setPower(-1);
-                if (v_motor_left_wheel.getCurrentPosition() >= turn) {
+                v_motor_left_wheel.setPower(-1);
+                v_motor_right_wheel.setPower(1);
+                if (v_motor_right_wheel.getCurrentPosition() >= turn) {
                     v_motor_left_wheel.setPower(0.0);
                     v_motor_right_wheel.setPower(0.0);
                     time = System.currentTimeMillis();

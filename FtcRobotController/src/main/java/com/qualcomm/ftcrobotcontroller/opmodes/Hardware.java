@@ -23,20 +23,22 @@ public class Hardware extends OpMode
     public TouchSensor v_sensor_top;
     public TouchSensor v_sensor_bottom;
     private static final double ENCODER_PER_ROT = 1440;
-    private static final double WHEEL_DISTANCE = 13.5; //inchs
+    private static final double WHEEL_DISTANCE = 13.75; //inchs
     private static final double WHEEL_DIEMITER = 4.0; //inchs
     private static final double WHEEL_CIRC = WHEEL_DIEMITER*Math.PI;
+    private static final double ENCODER_PER_DEGREE = ENCODER_PER_ROT/360;
+    private static final double GEAR_REDUCTION = 2;
 
-    // Changes the distance that we want the robot to travel to the degrees the motor has to turn
+    // Changes the distance that we want the robot to travel to the encoder clicks the motor has to turn
     public int DistanceToDegrees(double x)
     {
-        double exact = 2*ENCODER_PER_ROT*x/WHEEL_CIRC;
+        double exact = GEAR_REDUCTION*ENCODER_PER_ROT*x/WHEEL_CIRC;
         return (int) exact;
     }
-    // Changes the distance that the robot has to turn into degrees the motor has to turn.
+    // Changes the distance that the robot has to turn into encoder clicks the motor has to turn.
     public  int TurnToDegrees(double x)
     {
-        double exact = 2*x*WHEEL_DISTANCE/WHEEL_DIEMITER;
+        double exact = x*GEAR_REDUCTION*ENCODER_PER_DEGREE*WHEEL_DISTANCE/WHEEL_DIEMITER;
         return (int) exact;
     }
 
@@ -56,6 +58,7 @@ public class Hardware extends OpMode
         {
             motr=hardwareMap.dcMotor.get (name);
             motr.setDirection (dir);
+            motr.setPower(0.0);
             telemetry.addData(name + " Motor","found");
         }
         catch (Exception p_exeption)
@@ -137,15 +140,15 @@ public class Hardware extends OpMode
         //motors:
         v_motor_left_wheel = findMotor("Left Wheel", DcMotor.Direction.REVERSE);
         v_motor_right_wheel = findMotor("Right Wheel", DcMotor.Direction.FORWARD);
-        v_motor_lift = findMotor("Lift", DcMotor.Direction.FORWARD);
+        v_motor_lift = findMotor("Lift", DcMotor.Direction.REVERSE);
         v_motor_shooter = findMotor("Shooter", DcMotor.Direction.FORWARD);
 
 
         //servos:
 
-        v_servo_left_flap=findServo("Left Flap", 0.0);
-        v_servo_right_flap=findServo("Right Flap", 0.0);
-        v_servo_claw=findServo("Claw", 0.0);
+        v_servo_left_flap=findServo("Left Flap", 0.3);
+        v_servo_right_flap=findServo("Right Flap", 0.7);
+        v_servo_claw=findServo("Claw", 0.8);
 
         //sensors:
 
